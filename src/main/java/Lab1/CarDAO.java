@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public abstract class CarDAO {
 
-    private Boolean addChecking(Object value, String fieldName, Boolean isNotFirst, StringBuilder query) {
+    private Boolean CheckIN(Object value, String fieldName, Boolean isNotFirst, StringBuilder query) {
         if (value != null) {
             if (isNotFirst) {
                 query.append(" and ");
@@ -27,39 +27,39 @@ public abstract class CarDAO {
 
     public abstract Connection getConnection();
 
-    public List<Car> getDataByFields(String name, String director, String country, Date dateOfStart, Double duration) {
+    public List<Car> getDataByFields(String name, String model, String country, String dateOfSales, int power) {
         List<Car> cars = Collections.emptyList();
         try (Connection connection = getConnection()) {
             StringBuilder query = new StringBuilder("select * from cars");
             boolean notFirstField = false;
-            if (name != null || director != null || country != null && dateOfStart != null || duration != null) {
+            if (name != null || model != null || country != null && dateOfSales != null || power != 0) {
                 query.append(" where ");
             }
-            notFirstField = addChecking(name, "name", notFirstField, query);
-            notFirstField = addChecking(director, "director", notFirstField, query);
-            notFirstField = addChecking(country, "country", notFirstField, query);
-            notFirstField = addChecking(dateOfStart, "dateOfStart", notFirstField, query);
-            addChecking(duration, "duration", notFirstField, query);
+            notFirstField = CheckIN(name, "name", notFirstField, query);
+            notFirstField = CheckIN(model, "model", notFirstField, query);
+            notFirstField = CheckIN(country, "country", notFirstField, query);
+            notFirstField = CheckIN(dateOfSales, "dateOfSales", notFirstField, query);
+            CheckIN(power, "power", notFirstField, query);
 
             PreparedStatement stmt = connection.prepareStatement(query.toString());
             ResultSet rs = stmt.executeQuery();
-            cars = extractFilmsFromResultSet(rs);
+            cars = extractCarsFromResult(rs);
         } catch (SQLException ex) {
             Logger.getLogger(CarDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cars;
     }
 
-    private List<Car> extractFilmsFromResultSet(ResultSet rs) throws SQLException{
+    private List<Car> extractCarsFromResult(ResultSet rs) throws SQLException{
         List<Car> cars = new ArrayList<Car>();
         while (rs.next()) {
             String name = rs.getString("name");
-            Date date = rs.getDate("dateOfStart");
-            String director = rs.getString("director");
+            Date date = rs.getDate("dateOfSales");
+            String model = rs.getString("model");
             String country = rs.getString("country");
-            double duration = rs.getDouble("duration");
+            double power = rs.getDouble("power");
 
-            Car car = new Car(name, date, country, duration, director);
+            Car car = new Car(name, date, country, power, model);
             cars.add(car);
         } return cars;
     }

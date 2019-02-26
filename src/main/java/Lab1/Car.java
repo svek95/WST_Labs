@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class Car {
     private String name;
-    private Date dateOfStart;
+    private Date dateOfSales;
     private String country;
-    private double duration;
-    private String director;
+    private double power;
+    private String model;
 
-    public Car(String name, Date date, String country, double duration, String director) {
+    public Car(String name, Date date, String country, double power, String model) {
         this.name = name;
-        this.dateOfStart = date;
+        this.dateOfSales = date;
         this.country = country;
-        this.duration = duration;
-        this.director = director;
+        this.power = power;
+        this.model = model;
     }
 
     public String getName() {
@@ -25,12 +25,12 @@ public class Car {
         this.name = name;
     }
 
-    public Date getDateOfStart() {
-        return dateOfStart;
+    public Date getdateOfSales() {
+        return dateOfSales;
     }
 
-    public void setDateOfStart(Date dateOfStart) {
-        this.dateOfStart = dateOfStart;
+    public void setdateOfSales(Date dateOfSales) {
+        this.dateOfSales = dateOfSales;
     }
 
     public String getCountry() {
@@ -41,19 +41,31 @@ public class Car {
         this.country = country;
     }
 
-    public double getDuration() {
-        return duration;
+    public double getpower() {
+        return power;
     }
 
-    public void setDuration(double duration) {
-        this.duration = duration;
+    public void setpower(double power) {
+        this.power = power;
     }
 
-    public String getDirector() {
-        return director;
+    public String getmodel() {
+        return model;
     }
 
-    public void setDirector(String director) {
-        this.director = director;
+    public void setmodel(String model) {
+        this.model = model;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" + "name=" + name +
+                ", model=" + model +
+                ", dateOfSales=" + dateOfSales +
+                ", country=" + country +
+                ", power=" + power +
+                '}';
+    }
+
+
 }
