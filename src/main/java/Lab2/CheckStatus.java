@@ -2,9 +2,9 @@ package Lab2;
 
 public enum  CheckStatus {
 
-    SUCCESS_UPDATE("Row was successfully updated"),
-    SUCCESS_DELETE("Row eas successfully deleted"),
-    FAIL("Something went wrong");
+    SUCCESS_UPDATE("Successfully updated"),
+    SUCCESS_DELETE("Successfully deleted"),
+    FAIL("Something went wrong ): ");
 
     String value;
 
