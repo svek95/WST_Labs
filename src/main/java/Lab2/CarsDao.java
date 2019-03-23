@@ -40,7 +40,7 @@ public class CarsDao {
         return id;
     }
 
-    private static void addUpdatedValues(Object value, String fieldName, StringBuilder query) {
+    private static void addUpdated(Object value, String fieldName, StringBuilder query) {
         if (value != null) {
             if (value instanceof String) {
                 query.append(fieldName).append(" = '").append(value).append("'").append(", ");
@@ -52,11 +52,11 @@ public class CarsDao {
 
     public static CheckStatus updateDB(Integer id, String name, String model, String country, Date dateOfSales, int power) {
         StringBuilder query = new StringBuilder(" update cars set ");
-        addUpdatedValues(name, "name", query);
-        addUpdatedValues(model, "model", query);
-        addUpdatedValues(country, "country", query);
-        addUpdatedValues(dateOfSales, "dateOfSales", query);
-        addUpdatedValues(power, "power", query);
+        addUpdated(name, "name", query);
+        addUpdated(model, "model", query);
+        addUpdated(country, "country", query);
+        addUpdated(dateOfSales, "dateOfSales", query);
+        addUpdated(power, "power", query);
         query.replace(query.lastIndexOf("."), query.length(), " ");
         query.append(" where id = " + id);
         try (Connection connection = ConnectionUtil.getConnection();) {
