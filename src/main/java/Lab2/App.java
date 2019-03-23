@@ -1,6 +1,5 @@
 package Lab2;
 
-//import Lab1.CarWebService;
 
 import javax.xml.ws.Endpoint;
 
