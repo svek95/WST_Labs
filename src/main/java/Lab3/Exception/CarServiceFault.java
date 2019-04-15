@@ -2,7 +2,7 @@ package Lab3.Exception;
 
 public class CarServiceFault {
     private String message;
-    private final static String TEMPLATE_MESSAGE = "Problem during %s operation. %s";
+    private final static String TEMPLATE_MESSAGE = "Problems with %s operation. %s";
 
     public String getMessage() {
         return message;

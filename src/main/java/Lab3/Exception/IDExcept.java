@@ -7,7 +7,7 @@ public class IDExcept extends Exception {
     private CarServiceFault _CarServiceFault;
 
     private final static String TEMPLATE_OF_MESSAGE = "Error during %s operation. " +
-            "Film with id %d is not found";
+            "ERROR: Car with ID %d is not found";
 
     public IDExcept(Integer id, String command, CarServiceFault fault) {
         super(String.format(TEMPLATE_OF_MESSAGE, command, id));
