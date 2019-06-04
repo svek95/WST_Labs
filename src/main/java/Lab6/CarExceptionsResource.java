@@ -3,6 +3,7 @@ package Lab6;
 //import Lab3.Exception.CarServiceFault;
 //import Lab3.Exception.WrongValueExcept;
 import Lab6.Exception.WrongValueException;
+import Lab6.Exception.WrongIDException;
 import Lab4.common.Car;
 import Lab5.CarsDAO;
 
@@ -57,15 +58,19 @@ public class CarExceptionsResource {
         return String.valueOf(carDao.updateDB(id, name, model, country, dateOfSales, power));
     }
 
+
+
     /// Delete
 
     @Path("/delete/ID")
     @DELETE
-    public String deleteCars(@QueryParam("id") Integer id) {
+    public String deleteCars(@QueryParam("id") Integer id) throws WrongIDException {
 
-        return carDao.deleteDB(id).getStringValue();
+        if (carDao.findID(id)){
+            return carDao.deleteDB(id).getStringValue();
+        } else {
+            throw new WrongIDException(id, "delete");
+        }
+
     }
-
-
-
 }
