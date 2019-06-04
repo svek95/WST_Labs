@@ -54,8 +54,20 @@ public class CarExceptionsResource {
                              @QueryParam("model") String model,
                              @QueryParam("country") String country,
                              @QueryParam("dateOfSales") Date dateOfSales,
-                             @QueryParam("power") Integer power) {
-        return String.valueOf(carDao.updateDB(id, name, model, country, dateOfSales, power));
+                             @QueryParam("power") Integer power) throws WrongIDException, WrongValueException{
+        if (carDao.findID(id)){
+            if (power < 1 || power > 2000) {
+                throw new WrongValueException("insert","Power must be between 1 PS and 2000 PS");
+            } else {
+                return carDao.updateDB(id, name, model, country, dateOfSales, power).getStringValue();
+            }
+
+        } else {
+            throw new WrongIDException(id, "update");
+        }
+
+
+        //return String.valueOf(carDao.updateDB(id, name, model, country, dateOfSales, power));
     }
 
 
