@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
 
 
-    private static final String login = "uddiadmin";
+    private static final String login = "admin";
     private static final String password = "12345";
 
     public static void main(String[] args) {
